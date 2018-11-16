@@ -90,3 +90,26 @@ func MapColors(dst draw.Image, img image.Image) {
 		}
 	}
 }
+
+/**
+ * Create a shadow on horizontal edges
+ */
+func Shadow(dst draw.Image, img image.Image) {
+
+	bounds := dst.Bounds()
+
+	for y := 0; y < bounds.Max.Y; y++ {
+		r2 := img.At(0, y).(color.Gray).Y
+		for x := 1; x < bounds.Max.X; x++ {
+			r1 := img.At(x, y).(color.Gray).Y
+			if r1 < r2 {
+				c := dst.At(x, y).(color.RGBA)
+				c.R = uint8(float32(c.R) * 0.8)
+				c.G = uint8(float32(c.G) * 0.8)
+				c.B = uint8(float32(c.B) * 0.8)
+				dst.Set(x, y, c)
+			}
+			r2 = r1
+		}
+	}
+}

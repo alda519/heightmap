@@ -27,4 +27,7 @@ func main() {
 
     terrain.MapColors(out, img)
 	terrain.Save(out, "output.png")
+
+	terrain.Shadow(out, img)
+	terrain.Save(out, "output-sh.png")
 }
